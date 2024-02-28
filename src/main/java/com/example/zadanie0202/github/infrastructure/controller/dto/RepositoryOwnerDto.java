@@ -1,4 +1,4 @@
-package com.example.zadanie0202.github.controller.dto;
+package com.example.zadanie0202.github.infrastructure.controller.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

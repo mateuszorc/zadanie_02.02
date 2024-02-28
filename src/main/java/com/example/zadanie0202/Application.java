@@ -1,6 +1,6 @@
 package com.example.zadanie0202;
 
-import com.example.zadanie0202.github.controller.GithubRestController;
+import com.example.zadanie0202.github.infrastructure.controller.GithubRestController;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;

@@ -1,4 +1,4 @@
-package com.example.zadanie0202.github.error;
+package com.example.zadanie0202.github.infrastructure.controller.error;
 
 import org.springframework.http.HttpStatus;
 

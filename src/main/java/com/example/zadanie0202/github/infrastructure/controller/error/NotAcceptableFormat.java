@@ -1,4 +1,4 @@
-package com.example.zadanie0202.github.error;
+package com.example.zadanie0202.github.infrastructure.controller.error;
 
 public class NotAcceptableFormat extends RuntimeException{
 

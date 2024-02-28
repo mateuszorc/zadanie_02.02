@@ -1,9 +1,9 @@
-package com.example.zadanie0202.github.controller;
+package com.example.zadanie0202.github.infrastructure.controller;
 
-import com.example.zadanie0202.github.mapper.GithubMapper;
-import com.example.zadanie0202.github.controller.dto.GetUsersRepositoriesResponseDto;
-import com.example.zadanie0202.github.controller.model.Repository;
-import com.example.zadanie0202.github.service.RepositoryRetriever;
+import com.example.zadanie0202.github.domain.service.GithubMapper;
+import com.example.zadanie0202.github.infrastructure.controller.dto.GetUsersRepositoriesResponseDto;
+import com.example.zadanie0202.github.domain.model.Repository;
+import com.example.zadanie0202.github.domain.service.RepositoryRetriever;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

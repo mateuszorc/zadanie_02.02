@@ -1,6 +1,6 @@
-package com.example.zadanie0202.github.error;
+package com.example.zadanie0202.github.infrastructure.controller.error;
 
-import com.example.zadanie0202.github.controller.GithubRestController;
+import com.example.zadanie0202.github.infrastructure.controller.GithubRestController;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

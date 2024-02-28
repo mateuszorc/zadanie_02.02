@@ -1,6 +1,4 @@
-package com.example.zadanie0202.github.controller.model;
-
-import com.example.zadanie0202.github.controller.dto.GetBranchesResponseDto;
+package com.example.zadanie0202.github.domain.model;
 
 import java.util.List;
 

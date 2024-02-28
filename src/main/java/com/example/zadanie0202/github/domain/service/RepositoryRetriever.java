@@ -1,11 +1,11 @@
-package com.example.zadanie0202.github.service;
+package com.example.zadanie0202.github.domain.service;
 
-import com.example.zadanie0202.github.client.GithubClient;
-import com.example.zadanie0202.github.controller.dto.GithubGetRepositoryResponseDto;
-import com.example.zadanie0202.github.controller.dto.GetBranchesResponseDto;
-import com.example.zadanie0202.github.controller.model.Branch;
-import com.example.zadanie0202.github.controller.model.Repository;
-import com.example.zadanie0202.github.error.UsersRepositoryNotFoundException;
+import com.example.zadanie0202.github.infrastructure.client.GithubClient;
+import com.example.zadanie0202.github.infrastructure.controller.dto.GithubGetRepositoryResponseDto;
+import com.example.zadanie0202.github.infrastructure.controller.dto.GetBranchesResponseDto;
+import com.example.zadanie0202.github.domain.model.Branch;
+import com.example.zadanie0202.github.domain.model.Repository;
+import com.example.zadanie0202.github.infrastructure.controller.error.UsersRepositoryNotFoundException;
 import feign.FeignException;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
