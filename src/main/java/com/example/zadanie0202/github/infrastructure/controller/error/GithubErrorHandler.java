@@ -22,8 +22,9 @@ public class GithubErrorHandler extends Throwable {
     }
 
     @ExceptionHandler(HttpMediaTypeNotAcceptableException.class)
-    public ResponseEntity<ErrorGithubResponseDto> handleHttpMediaTypeNotAcceptableException() {
+    public ResponseEntity<ErrorGithubResponseDto> handleHttpMediaTypeNotAcceptableException(HttpMediaTypeNotAcceptableException exception) {
         log.warn("NotAcceptableFormat while getting repositories");
+        log.warn(exception.getMessage());
         return ResponseEntity
                 .status(HttpStatus.NOT_ACCEPTABLE)
                 .body(new ErrorGithubResponseDto(HttpStatus.NOT_ACCEPTABLE, "acceptable MIME type:" + MediaType.APPLICATION_JSON_VALUE));
