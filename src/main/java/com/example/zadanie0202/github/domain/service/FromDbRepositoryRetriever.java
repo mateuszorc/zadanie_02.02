@@ -17,6 +17,6 @@ public class FromDbRepositoryRetriever {
     }
 
     public List<Repository> getUsersRepositories(String username, Pageable pageable) {
-        return githubRepository.findAllByName(username, pageable);
+        return githubRepository.findAllByOwner(username, pageable);
     }
 }

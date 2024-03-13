@@ -10,8 +10,8 @@ import java.util.List;
 public interface GithubRepository extends org.springframework.data.repository.Repository<Repository, Long> {
 
 
-    @Query("SELECT r FROM Repository r WHERE r.name=:username")
-    List<Repository> findAllByName(String username, Pageable pageable);
+    @Query("SELECT r FROM Repository r WHERE r.ownerLogin=:username")
+    List<Repository> findAllByOwner(String username, Pageable pageable);
 
     void save(Repository repo);
 }
