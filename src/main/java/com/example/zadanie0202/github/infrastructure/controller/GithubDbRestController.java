@@ -3,8 +3,10 @@ package com.example.zadanie0202.github.infrastructure.controller;
 import com.example.zadanie0202.github.domain.service.FromDbRepositoryRetriever;
 import com.example.zadanie0202.github.domain.service.GithubMapper;
 import com.example.zadanie0202.github.domain.service.RepositoryAdder;
+import com.example.zadanie0202.github.domain.service.RepositoryUpdater;
 import com.example.zadanie0202.github.infrastructure.controller.githubdbdto.PostRepositoryRequestDto;
 import com.example.zadanie0202.github.infrastructure.controller.githubdbdto.PostRepositoryResponseDto;
+import com.example.zadanie0202.github.infrastructure.controller.githubdbdto.UpdateRepositoryRequestDto;
 import com.example.zadanie0202.github.infrastructure.controller.githubdbdto.UpdateRepositoryResponseDto;
 import com.example.zadanie0202.github.infrastructure.controller.githubdto.GetUsersRepositoriesResponseDto;
 import com.example.zadanie0202.github.domain.model.Repository;
@@ -24,11 +26,14 @@ public class GithubDbRestController {
 
     private final FromDbRepositoryRetriever fromDbRepositoryRetriever;
     private final RepositoryAdder repositoryAdder;
+    private final RepositoryUpdater repositoryUpdater;
     private final GithubMapper githubMapper;
 
-    public GithubDbRestController(FromDbRepositoryRetriever fromDbRepositoryRetriever, RepositoryAdder repositoryAdder, GithubMapper githubMapper) {
+    public GithubDbRestController(FromDbRepositoryRetriever fromDbRepositoryRetriever, RepositoryAdder repositoryAdder,
+                                  RepositoryUpdater repositoryUpdater, GithubMapper githubMapper) {
         this.fromDbRepositoryRetriever = fromDbRepositoryRetriever;
         this.repositoryAdder = repositoryAdder;
+        this.repositoryUpdater = repositoryUpdater;
         this.githubMapper = githubMapper;
     }
 
@@ -47,6 +52,12 @@ public class GithubDbRestController {
         return ResponseEntity.status(HttpStatus.OK).body(postRepositoryResponseDto);
     }
 
-    @PutMapping(value = "/{name}")
-    public ResponseEntity<UpdateRepositoryResponseDto>
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<UpdateRepositoryResponseDto> updateRepositoryByName(@PathVariable Long id,
+                                                                              @RequestBody UpdateRepositoryRequestDto requestDto) {
+        Repository repository = githubMapper.mapFromUpdateRepositoryRequestDtoToRepository(requestDto);
+        repositoryUpdater.updateById(id, repository);
+        UpdateRepositoryResponseDto updateRepositoryResponseDto = githubMapper.mapFromRepositoryToUpdateRepositoryResponseDto(repository);
+        return ResponseEntity.status(HttpStatus.OK).body(updateRepositoryResponseDto);
+    }
 }
