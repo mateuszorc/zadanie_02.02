@@ -1,8 +1,8 @@
 package com.example.zadanie0202.github.domain.service;
 
 import com.example.zadanie0202.github.infrastructure.client.GithubClient;
-import com.example.zadanie0202.github.infrastructure.controller.dto.GithubGetRepositoryResponseDto;
-import com.example.zadanie0202.github.infrastructure.controller.dto.GetBranchesResponseDto;
+import com.example.zadanie0202.github.infrastructure.controller.githubdto.GithubGetRepositoryResponseDto;
+import com.example.zadanie0202.github.infrastructure.controller.githubdto.GetBranchesResponseDto;
 import com.example.zadanie0202.github.domain.model.Branch;
 import com.example.zadanie0202.github.domain.model.Repository;
 import com.example.zadanie0202.github.infrastructure.controller.error.UsersRepositoryNotFoundException;

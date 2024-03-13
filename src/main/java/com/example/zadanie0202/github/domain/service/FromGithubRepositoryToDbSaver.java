@@ -2,7 +2,7 @@ package com.example.zadanie0202.github.domain.service;
 
 import com.example.zadanie0202.github.domain.model.Repository;
 import com.example.zadanie0202.github.domain.repository.GithubRepository;
-import com.example.zadanie0202.github.infrastructure.controller.dto.GithubGetRepositoryResponseDto;
+import com.example.zadanie0202.github.infrastructure.controller.githubdto.GithubGetRepositoryResponseDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

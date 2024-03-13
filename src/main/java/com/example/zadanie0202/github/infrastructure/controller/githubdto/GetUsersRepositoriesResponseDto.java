@@ -1,4 +1,4 @@
-package com.example.zadanie0202.github.infrastructure.controller.dto;
+package com.example.zadanie0202.github.infrastructure.controller.githubdto;
 
 import com.example.zadanie0202.github.domain.model.Repository;
 

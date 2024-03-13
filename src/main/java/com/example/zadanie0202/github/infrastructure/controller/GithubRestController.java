@@ -1,7 +1,7 @@
 package com.example.zadanie0202.github.infrastructure.controller;
 
 import com.example.zadanie0202.github.domain.service.GithubMapper;
-import com.example.zadanie0202.github.infrastructure.controller.dto.GetUsersRepositoriesResponseDto;
+import com.example.zadanie0202.github.infrastructure.controller.githubdto.GetUsersRepositoriesResponseDto;
 import com.example.zadanie0202.github.domain.model.Repository;
 import com.example.zadanie0202.github.domain.service.RepositoryRetriever;
 import lombok.extern.log4j.Log4j2;
