@@ -4,12 +4,14 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Builder
 @Getter
 @Setter
 @Table(name = "repo")
+@ToString
 public class Repository {
 
     @Id

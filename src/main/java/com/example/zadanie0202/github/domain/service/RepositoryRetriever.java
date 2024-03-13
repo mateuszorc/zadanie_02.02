@@ -34,7 +34,6 @@ public class RepositoryRetriever {
             List<Repository> repositories = userRepositories.stream()
                     .map(repo -> new Repository(repo.name(), repo.owner().login()))
                     .toList();
-            log.info(repositories);
             return repositories;
         } catch (FeignException.FeignClientException e) {
             throw new UsersRepositoryNotFoundException("There are no repositories for username: " + username);
