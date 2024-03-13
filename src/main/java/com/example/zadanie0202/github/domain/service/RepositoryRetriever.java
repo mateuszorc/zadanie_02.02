@@ -19,15 +19,18 @@ import java.util.stream.Collectors;
 public class RepositoryRetriever {
 
     private final GithubClient githubClient;
+    private final FromGithubRepositoryToDbSaver fromGithubRepositoryToDbSaver;
 
     @Autowired
-    public RepositoryRetriever(GithubClient githubClient) {
+    public RepositoryRetriever(GithubClient githubClient, FromGithubRepositoryToDbSaver fromGithubRepositoryToDbSaver) {
         this.githubClient = githubClient;
+        this.fromGithubRepositoryToDbSaver = fromGithubRepositoryToDbSaver;
     }
 
     public List<Repository> getUsersRepositoriesWithBranches(String username) {
         try {
             List<GithubGetRepositoryResponseDto> userRepositories = getUsersRepositories(username);
+            fromGithubRepositoryToDbSaver.saveAll(userRepositories);
             List<Repository> repositories = userRepositories.stream()
                     .map(repo -> new Repository(repo.name(), repo.owner().login(), getBranchesByUserAndRepoName(repo.owner().login(), repo.name())))
                     .toList();

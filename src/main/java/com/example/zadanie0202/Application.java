@@ -28,6 +28,6 @@ public class Application {
 
     @EventListener(ApplicationStartedEvent.class)
     public void run() {
-//        githubRestController.getUsersRespositories("sdasdasfaegw");
+        githubRestController.getUsersRespositories("kalqa");
     }
 }
