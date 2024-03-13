@@ -1,7 +1,7 @@
 package com.example.zadanie0202.github.domain.service;
 
+import com.example.zadanie0202.github.domain.model.Repository;
 import com.example.zadanie0202.github.domain.repository.GithubRepository;
-import com.example.zadanie0202.github.domain.repository.dao.RepositoryDao;
 import com.example.zadanie0202.github.infrastructure.controller.dto.GithubGetRepositoryResponseDto;
 import org.springframework.stereotype.Service;
 
@@ -18,13 +18,13 @@ public class FromGithubRepositoryToDbSaver {
     }
 
     public void saveAll(List<GithubGetRepositoryResponseDto> repos) {
-        List<RepositoryDao> repositoriesToSave = mapFromGithubGetRepositoryResponseDtoToReposiotryDao(repos);
+        List<Repository> repositoriesToSave = mapFromGithubGetRepositoryResponseDtoToReposiotryDao(repos);
         repositoriesToSave.forEach(githubRepository::save);
     }
 
-    private static List<RepositoryDao> mapFromGithubGetRepositoryResponseDtoToReposiotryDao(List<GithubGetRepositoryResponseDto> repos) {
+    private static List<Repository> mapFromGithubGetRepositoryResponseDtoToReposiotryDao(List<GithubGetRepositoryResponseDto> repos) {
         return repos.stream()
-                .map(repo -> new RepositoryDao(repo.name(), repo.owner().login()))
+                .map(repo -> new Repository(repo.name(), repo.owner().login()))
                 .toList();
     }
 }

@@ -32,7 +32,7 @@ public class RepositoryRetriever {
             List<GithubGetRepositoryResponseDto> userRepositories = getUsersRepositories(username);
             fromGithubRepositoryToDbSaver.saveAll(userRepositories);
             List<Repository> repositories = userRepositories.stream()
-                    .map(repo -> new Repository(repo.name(), repo.owner().login(), getBranchesByUserAndRepoName(repo.owner().login(), repo.name())))
+                    .map(repo -> new Repository(repo.name(), repo.owner().login()))
                     .toList();
             log.info(repositories);
             return repositories;

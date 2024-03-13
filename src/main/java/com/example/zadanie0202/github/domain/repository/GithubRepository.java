@@ -1,11 +1,10 @@
 package com.example.zadanie0202.github.domain.repository;
 
-import com.example.zadanie0202.github.domain.repository.dao.RepositoryDao;
-import org.springframework.data.repository.Repository;
+
+import com.example.zadanie0202.github.domain.model.Repository;
+
+public interface GithubRepository extends org.springframework.data.repository.Repository<Repository, Long> {
 
 
-public interface GithubRepository extends Repository<RepositoryDao, Long> {
-
-
-    void save(RepositoryDao repo);
+    void save(Repository repo);
 }
