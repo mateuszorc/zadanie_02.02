@@ -14,12 +14,16 @@ public interface GithubRepository extends org.springframework.data.repository.Re
     @Query("SELECT r FROM Repository r WHERE r.ownerLogin=:username")
     List<Repository> findAllByOwner(String username, Pageable pageable);
 
-    @Query("SELECT r FROM Repository r WHERE r.id=:id")
-    Repository findById(Long id);
+    @Query("SELECT r FROM Repository r WHERE r.name=:name")
+    Repository findByName(String name);
 
     void save(Repository repo);
 
     @Modifying
     @Query("UPDATE Repository r SET r.name=:#{#repository.name}, r.ownerLogin=:#{#repository.ownerLogin} WHERE r.id=:id")
     void updateById(Long id, Repository repository);
+
+    @Modifying
+    @Query("DELETE FROM Repository r WHERE r.id=:id")
+    void deleteById(Long id);
 }

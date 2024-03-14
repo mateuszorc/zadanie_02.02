@@ -1,15 +1,10 @@
 package com.example.zadanie0202.github.infrastructure.controller;
 
-import com.example.zadanie0202.github.domain.service.FromDbRepositoryRetriever;
-import com.example.zadanie0202.github.domain.service.GithubMapper;
-import com.example.zadanie0202.github.domain.service.RepositoryAdder;
-import com.example.zadanie0202.github.domain.service.RepositoryUpdater;
-import com.example.zadanie0202.github.infrastructure.controller.githubdbdto.PostRepositoryRequestDto;
-import com.example.zadanie0202.github.infrastructure.controller.githubdbdto.PostRepositoryResponseDto;
-import com.example.zadanie0202.github.infrastructure.controller.githubdbdto.UpdateRepositoryRequestDto;
-import com.example.zadanie0202.github.infrastructure.controller.githubdbdto.UpdateRepositoryResponseDto;
+import com.example.zadanie0202.github.domain.service.*;
+import com.example.zadanie0202.github.infrastructure.controller.githubdbdto.*;
 import com.example.zadanie0202.github.infrastructure.controller.githubdto.GetUsersRepositoriesResponseDto;
 import com.example.zadanie0202.github.domain.model.Repository;
+import jakarta.validation.Valid;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -27,13 +22,15 @@ public class GithubDbRestController {
     private final FromDbRepositoryRetriever fromDbRepositoryRetriever;
     private final RepositoryAdder repositoryAdder;
     private final RepositoryUpdater repositoryUpdater;
+    private final RepositoryRemover repositoryRemover;
     private final GithubMapper githubMapper;
 
     public GithubDbRestController(FromDbRepositoryRetriever fromDbRepositoryRetriever, RepositoryAdder repositoryAdder,
-                                  RepositoryUpdater repositoryUpdater, GithubMapper githubMapper) {
+                                  RepositoryUpdater repositoryUpdater, RepositoryRemover repositoryRemover, GithubMapper githubMapper) {
         this.fromDbRepositoryRetriever = fromDbRepositoryRetriever;
         this.repositoryAdder = repositoryAdder;
         this.repositoryUpdater = repositoryUpdater;
+        this.repositoryRemover = repositoryRemover;
         this.githubMapper = githubMapper;
     }
 
@@ -52,12 +49,27 @@ public class GithubDbRestController {
         return ResponseEntity.status(HttpStatus.OK).body(postRepositoryResponseDto);
     }
 
-    @PutMapping(value = "/{id}")
-    public ResponseEntity<UpdateRepositoryResponseDto> updateRepositoryByName(@PathVariable Long id,
-                                                                              @RequestBody UpdateRepositoryRequestDto requestDto) {
+    @PutMapping(value = "/{name}")
+    public ResponseEntity<UpdateRepositoryResponseDto> updateRepositoryByName(@PathVariable String name,
+                                                                              @RequestBody @Valid UpdateRepositoryRequestDto requestDto) {
         Repository repository = githubMapper.mapFromUpdateRepositoryRequestDtoToRepository(requestDto);
-        repositoryUpdater.updateById(id, repository);
+        repositoryUpdater.updateById(name, repository);
         UpdateRepositoryResponseDto updateRepositoryResponseDto = githubMapper.mapFromRepositoryToUpdateRepositoryResponseDto(repository);
         return ResponseEntity.status(HttpStatus.OK).body(updateRepositoryResponseDto);
+    }
+
+    @PatchMapping(value = "/{name}")
+    public ResponseEntity<PartiallyUpdateRepositoryResponseDto> partiallyUpdateRepository(@PathVariable String name,
+                                                                                          @RequestBody PartiallyUpdateRepositoryRequestDto requestDto) {
+        Repository repository = githubMapper.mapFromPartiallyUpdateRepositoryRequestDtoToRepository(requestDto);
+        Repository savedRepository = repositoryUpdater.partiallyUpdateRepository(name, repository);
+        PartiallyUpdateRepositoryResponseDto partiallyUpdateRepositoryResponseDto = githubMapper.mapFromRepositorytoPartiallyUpdateRepositoryResponseDto(savedRepository);
+        return ResponseEntity.ok().body(partiallyUpdateRepositoryResponseDto);
+    }
+
+    @DeleteMapping(value = "/{name}")
+    public ResponseEntity<DeleteRepositoryResponseDto> deleteRepositoryByName(@PathVariable String name) {
+        repositoryRemover.deleteRepository(name);
+        return ResponseEntity.ok().body(new DeleteRepositoryResponseDto("Deleted repository with name " + name, HttpStatus.OK));
     }
 }
